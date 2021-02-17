@@ -1,4 +1,4 @@
-package com.cloudapps.architecture.ecommerce;
+package com.cloudapps.ecommerce;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
