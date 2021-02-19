@@ -1,14 +1,19 @@
-package com.cloudapps.ecommerce.controller.dto.product;
+package com.cloudapps.ecommerce.domain.product.dto;
 
-public class PostProductRequestDto {
-	
+public class ProductDto {
+
 	private String name;
 	
 	private String description;
+	
+	private int quantity;
 
-	public PostProductRequestDto(String name, String description) {
+	public ProductDto() {}
+	
+	public ProductDto(String name, String description, int quantity) {
 		this.name = name;
 		this.description = description;
+		this.quantity = quantity;
 	}
 
 	public String getName() {
@@ -25,6 +30,14 @@ public class PostProductRequestDto {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}	
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 
 }

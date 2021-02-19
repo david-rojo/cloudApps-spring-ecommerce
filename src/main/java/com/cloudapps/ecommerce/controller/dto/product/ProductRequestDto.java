@@ -1,32 +1,21 @@
 package com.cloudapps.ecommerce.controller.dto.product;
 
-import com.cloudapps.ecommerce.domain.product.dto.FullProductDto;
+public class ProductRequestDto {
 
-public class ProductResponseDto {
-
-	private Long id;
-	
 	private String name;
 	
 	private String description;
 	
 	private int quantity;
 
-	public ProductResponseDto(Long id, String name, String description, int quantity) {
-		this.id = id;
+	public ProductRequestDto() {}
+	
+	public ProductRequestDto(String name, String description, int quantity) {
 		this.name = name;
 		this.description = description;
 		this.quantity = quantity;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
 	public String getName() {
 		return name;
 	}
@@ -41,21 +30,13 @@ public class ProductResponseDto {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}	
-	
+	}
+
 	public int getQuantity() {
 		return quantity;
 	}
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
-	}
-
-	public static ProductResponseDto fromFullProductDto(FullProductDto fullProductDto) {
-		return new ProductResponseDto(
-				fullProductDto.getId(),
-				fullProductDto.getName(),
-				fullProductDto.getDescription(),
-				fullProductDto.getQuantity());
-	}
+	}	
 }
