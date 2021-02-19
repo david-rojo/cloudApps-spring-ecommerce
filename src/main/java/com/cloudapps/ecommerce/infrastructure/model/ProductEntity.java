@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class ProductEntity {
@@ -17,6 +18,9 @@ public class ProductEntity {
 	private String description;
 	
 	private int quantity;
+	
+	@ManyToOne
+	private ShoppingCartEntity shoppingCart;
 	
 	public ProductEntity() {}
 	
@@ -63,6 +67,14 @@ public class ProductEntity {
 		this.quantity = quantity;
 	}
 	
+	public ShoppingCartEntity getShoppingCart() {
+		return shoppingCart;
+	}
+
+	public void setShoppingCart(ShoppingCartEntity shoppingCart) {
+		this.shoppingCart = shoppingCart;
+	}
+
 	@Override
 	public String toString() {
 		return String.format("Product [id=%s, name=%s, description=%s, quantity=%d]", id, name, description, quantity);

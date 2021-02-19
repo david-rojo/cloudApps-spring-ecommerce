@@ -35,7 +35,7 @@ public class ProductController {
 	@PostMapping(value="")
 	public ResponseEntity<ProductResponseDto> postProduct(@RequestBody ProductRequestDto productRequestDto) {
 		
-		FullProductDto fullProduct = products.save(productRequestDto);
+		FullProductDto fullProduct = products.create(productRequestDto);
 		
 		ProductResponseDto responseProductDto = new ProductResponseDto(
 				fullProduct.getId(), 

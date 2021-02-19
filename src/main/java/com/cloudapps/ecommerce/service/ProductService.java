@@ -33,7 +33,7 @@ public class ProductService {
 		return productUseCase.findProductById(id).map(ProductResponseDto::fromFullProductDto);
 	}
 	
-	public FullProductDto save(ProductRequestDto product) {
+	public FullProductDto create(ProductRequestDto product) {
 		
 		ProductDto productDto = new ProductDto(
 				product.getName(),
