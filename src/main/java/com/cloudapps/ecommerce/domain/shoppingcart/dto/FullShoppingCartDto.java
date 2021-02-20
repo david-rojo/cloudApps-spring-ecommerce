@@ -4,17 +4,28 @@ import java.util.List;
 
 import com.cloudapps.ecommerce.domain.product.dto.FullProductDto;
 
-public class ShoppingCartDto {
+public class FullShoppingCartDto {
+
+private Long id;
 	
 	private boolean completed;
 	
 	private List<FullProductDto> products;
 	
-	public ShoppingCartDto() {}
+	public FullShoppingCartDto() {}
 
-	public ShoppingCartDto(boolean completed, List<FullProductDto> products) {
+	public FullShoppingCartDto(Long id, boolean completed, List<FullProductDto> products) {
+		this.id = id;
 		this.completed = completed;
 		this.products = products;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public boolean isCompleted() {

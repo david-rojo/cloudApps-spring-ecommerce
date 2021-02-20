@@ -29,8 +29,7 @@ public class ProductRepositoryAdapter implements ProductRepository {
 		ProductEntity productEntity = new ProductEntity(
 				product.getId(),
 				product.getName(),
-				product.getDescription(),
-				product.getQuantity());
+				product.getDescription());
 		
 		ProductEntity savedBookEntity = productJpaRepository.save(productEntity);
 		

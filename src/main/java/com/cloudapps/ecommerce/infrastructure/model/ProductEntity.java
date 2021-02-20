@@ -1,10 +1,12 @@
 package com.cloudapps.ecommerce.infrastructure.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class ProductEntity {
@@ -17,22 +19,19 @@ public class ProductEntity {
 	
 	private String description;
 	
-	private int quantity;
-	
-	@ManyToOne
-	private ShoppingCartEntity shoppingCart;
+	@ManyToMany(mappedBy = "products")
+    private List<ShoppingCartEntity> shoppingCarts;
 	
 	public ProductEntity() {}
 	
-	public ProductEntity(String name, String description, int quantity) {
-		this(null, name, description, quantity);
+	public ProductEntity(String name, String description) {
+		this(null, name, description);
 	}
 
-	public ProductEntity(Long id, String name, String description, int quantity) {
+	public ProductEntity(Long id, String name, String description) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
-		this.quantity = quantity;
 	}
 
 	public Long getId() {
@@ -59,25 +58,9 @@ public class ProductEntity {
 		this.description = description;
 	}
 
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-	
-	public ShoppingCartEntity getShoppingCart() {
-		return shoppingCart;
-	}
-
-	public void setShoppingCart(ShoppingCartEntity shoppingCart) {
-		this.shoppingCart = shoppingCart;
-	}
-
 	@Override
 	public String toString() {
-		return String.format("Product [id=%s, name=%s, description=%s, quantity=%d]", id, name, description, quantity);
+		return String.format("Product [id=%s, name=%s, description=%s, quantity=%d]", id, name, description);
 	}
 	
 }

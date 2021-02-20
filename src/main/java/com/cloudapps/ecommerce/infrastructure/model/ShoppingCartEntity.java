@@ -9,7 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class ShoppingCartEntity {
@@ -20,8 +22,12 @@ public class ShoppingCartEntity {
 	
 	private boolean completed;
 	
-	@OneToMany(mappedBy="shoppingCart", cascade = CascadeType.ALL)
-	private List<ProductEntity> products;
+	@ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+    		name = "shopping_cart_product",
+            joinColumns = {@JoinColumn(name = "shopping_cart_id")},
+            inverseJoinColumns = {@JoinColumn(name = "product_id")})
+    private List<ProductEntity> products;
 	
 	public ShoppingCartEntity() {}
 
@@ -65,7 +71,6 @@ public class ShoppingCartEntity {
 	
 	public void addProduct(ProductEntity product) {
 		products.add(product);
-		product.setShoppingCart(this);
 	}
 	
 	public void removeProduct(ProductEntity product) {
@@ -73,7 +78,6 @@ public class ShoppingCartEntity {
 		if(!removed) {
 			throw new NoSuchElementException();
 		}
-		product.setShoppingCart(null);
 	}
 	
 }

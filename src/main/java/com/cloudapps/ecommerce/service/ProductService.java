@@ -21,24 +21,19 @@ public class ProductService {
 		this.productUseCase = productUseCase;
 	}
 	
-	public Collection<ProductResponseDto> findAll() {
-		return productUseCase
-				.findAllProducts()
-				.stream()
-				.map(ProductResponseDto::fromFullProductDto)
-				.collect(Collectors.toList());
+	public Collection<FullProductDto> findAll() {
+		return productUseCase.findAllProducts();
 	}
 	
-	public Optional<ProductResponseDto> findById(Long id) {
-		return productUseCase.findProductById(id).map(ProductResponseDto::fromFullProductDto);
+	public Optional<FullProductDto> findById(Long id) {
+		return productUseCase.findProductById(id);
 	}
 	
 	public FullProductDto create(ProductRequestDto product) {
 		
 		ProductDto productDto = new ProductDto(
 				product.getName(),
-				product.getDescription(),
-				product.getQuantity());
+				product.getDescription());
 		
 		return productUseCase.createProduct(productDto);
 	}

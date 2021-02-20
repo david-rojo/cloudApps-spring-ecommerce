@@ -8,21 +8,21 @@ import org.springframework.stereotype.Component;
 import com.cloudapps.ecommerce.controller.dto.product.ProductResponseDto;
 import com.cloudapps.ecommerce.controller.dto.shoppingcart.ShoppingCartResponseDto;
 import com.cloudapps.ecommerce.domain.product.dto.FullProductDto;
-import com.cloudapps.ecommerce.domain.shoppingcart.dto.ShoppingCartDto;
+import com.cloudapps.ecommerce.domain.shoppingcart.dto.FullShoppingCartDto;
 
 @Component
 public class ControllerObjectMapper {
 
+	
 	public ProductResponseDto toProductResponseDto(FullProductDto fullProduct) {
 		
 		return new ProductResponseDto(
 				fullProduct.getId(), 
 				fullProduct.getName(), 
-				fullProduct.getDescription(), 
-				fullProduct.getQuantity());
+				fullProduct.getDescription());
 	}
 	
-	public ShoppingCartResponseDto toShoppingCartResponseDto(ShoppingCartDto shoppingCart) {
+	public ShoppingCartResponseDto toShoppingCartResponseDto(FullShoppingCartDto shoppingCart) {
 		List<ProductResponseDto> listProductResponseDto = new ArrayList<>();
 		shoppingCart.getProducts().forEach(fullProduct -> listProductResponseDto.add(this.toProductResponseDto(fullProduct)));
 	

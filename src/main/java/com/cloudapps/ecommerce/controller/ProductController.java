@@ -4,6 +4,7 @@ import static org.springframework.web.servlet.support.ServletUriComponentsBuilde
 
 import java.net.URI;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +33,10 @@ public class ProductController {
 	
 	@GetMapping(value="")
 	public Collection<ProductResponseDto> getProducts() {
-		return products.findAll();
+		return products.findAll()
+				.stream()
+				.map(mapper::toProductResponseDto)
+				.collect(Collectors.toList());
 	}
 	
 	@PostMapping(value="")
@@ -49,14 +53,15 @@ public class ProductController {
 	
 	@GetMapping(value="/{id}")
 	public ProductResponseDto getProduct(@PathVariable(value="id") Long id) {
-		return products.findById(id).orElseThrow();
+		FullProductDto fullProductDto = products.findById(id).orElseThrow();
+		return mapper.toProductResponseDto(fullProductDto);
 	}
 	
 	@DeleteMapping(value="/{id}")
 	public ProductResponseDto deleteProduct(@PathVariable(value="id") Long id) {
 		
-		ProductResponseDto product = products.findById(id).orElseThrow();
+		FullProductDto fullProductDto = products.findById(id).orElseThrow();
 		products.deleteById(id);
-		return product;		
+		return mapper.toProductResponseDto(fullProductDto);		
 	}
 }

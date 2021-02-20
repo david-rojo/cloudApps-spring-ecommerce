@@ -24,8 +24,7 @@ public class ProductUseCaseImpl implements ProductUseCase {
 		
 		FullProductDto product = new FullProductDto(
 				productDto.getName(),
-				productDto.getDescription(),
-				productDto.getQuantity());
+				productDto.getDescription());
 		return productRepository.save(product);				
 	}
 

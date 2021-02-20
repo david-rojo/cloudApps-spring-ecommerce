@@ -8,19 +8,16 @@ public class FullProductDto {
 	
 	private String description;
 	
-	private int quantity;
-	
 	public FullProductDto() {}
 
-	public FullProductDto(String name, String description, int quantity) {
-		this(null, name, description, quantity);
+	public FullProductDto(String name, String description) {
+		this(null, name, description);
 	}
 	
-	public FullProductDto(Long id, String name, String description, int quantity) {
+	public FullProductDto(Long id, String name, String description) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
-		this.quantity = quantity;
 	}
 
 	public Long getId() {
@@ -45,14 +42,6 @@ public class FullProductDto {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
 	}	
 
 }

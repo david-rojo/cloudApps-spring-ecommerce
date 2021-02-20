@@ -9,14 +9,11 @@ public class ProductResponseDto {
 	private String name;
 	
 	private String description;
-	
-	private int quantity;
 
-	public ProductResponseDto(Long id, String name, String description, int quantity) {
+	public ProductResponseDto(Long id, String name, String description) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
-		this.quantity = quantity;
 	}
 
 	public Long getId() {
@@ -42,20 +39,12 @@ public class ProductResponseDto {
 	public void setDescription(String description) {
 		this.description = description;
 	}	
-	
-	public int getQuantity() {
-		return quantity;
-	}
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-
-	public static ProductResponseDto fromFullProductDto(FullProductDto fullProductDto) {
-		return new ProductResponseDto(
-				fullProductDto.getId(),
-				fullProductDto.getName(),
-				fullProductDto.getDescription(),
-				fullProductDto.getQuantity());
-	}
+//	public static ProductResponseDto fromFullProductDto(FullProductDto fullProductDto) {
+//		return new ProductResponseDto(
+//				fullProductDto.getId(),
+//				fullProductDto.getName(),
+//				fullProductDto.getDescription(),
+//				fullProductDto.getQuantity());
+//	}
 }

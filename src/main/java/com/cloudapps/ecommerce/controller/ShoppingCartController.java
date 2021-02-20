@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cloudapps.ecommerce.controller.dto.shoppingcart.ShoppingCartPostResponseDto;
 import com.cloudapps.ecommerce.controller.dto.shoppingcart.ShoppingCartResponseDto;
+import com.cloudapps.ecommerce.domain.shoppingcart.dto.FullShoppingCartDto;
 import com.cloudapps.ecommerce.domain.shoppingcart.dto.NewShoppingCartDto;
-import com.cloudapps.ecommerce.domain.shoppingcart.dto.ShoppingCartDto;
 import com.cloudapps.ecommerce.service.ShoppingCartService;
 
 @RestController
@@ -48,13 +48,14 @@ public class ShoppingCartController {
 	@PatchMapping(path = "/{id}")
 	public ShoppingCartResponseDto completeShoppingCart(@PathVariable Long id) {
 		
-		ShoppingCartDto shoppingCart = shoppingCarts.complete(id);
+		FullShoppingCartDto shoppingCart = shoppingCarts.complete(id);
 		return mapper.toShoppingCartResponseDto(shoppingCart);
 	}
 	
 	@GetMapping(value="/{id}")
 	public ShoppingCartResponseDto getShoppingCart(@PathVariable(value="id") Long id) {
-		return shoppingCarts.findById(id).orElseThrow();
+		FullShoppingCartDto shoppingCartDto = shoppingCarts.findById(id).orElseThrow();
+		return mapper.toShoppingCartResponseDto(shoppingCartDto);
 	}
 	
 	@DeleteMapping(value="/{id}")

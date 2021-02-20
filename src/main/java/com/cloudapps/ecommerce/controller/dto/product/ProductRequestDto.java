@@ -5,15 +5,12 @@ public class ProductRequestDto {
 	private String name;
 	
 	private String description;
-	
-	private int quantity;
 
 	public ProductRequestDto() {}
 	
-	public ProductRequestDto(String name, String description, int quantity) {
+	public ProductRequestDto(String name, String description) {
 		this.name = name;
 		this.description = description;
-		this.quantity = quantity;
 	}
 
 	public String getName() {
@@ -31,12 +28,4 @@ public class ProductRequestDto {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}	
 }

@@ -47,17 +47,17 @@ public class ShoppingCartResponseDto {
 		this.products = products;
 	}
 	
-	public static ShoppingCartResponseDto fromShoppingCartDto(ShoppingCartDto shoppingCartDto) {
-		List<ProductResponseDto> listProductDto = shoppingCartDto
-				.getProducts()
-				.stream()
-				.map(ProductResponseDto::fromFullProductDto)
-				.collect(Collectors.toList());
-		
-		return new ShoppingCartResponseDto(
-				shoppingCartDto.getId(),
-				shoppingCartDto.isCompleted(),
-				listProductDto);
-	}
+//	public static ShoppingCartResponseDto fromShoppingCartDto(ShoppingCartDto shoppingCartDto) {
+//		List<ProductResponseDto> listProductDto = shoppingCartDto
+//				.getProducts()
+//				.stream()
+//				.map(ProductResponseDto::fromFullProductDto)
+//				.collect(Collectors.toList());
+//		
+//		return new ShoppingCartResponseDto(
+//				shoppingCartDto.getId(),
+//				shoppingCartDto.isCompleted(),
+//				listProductDto);
+//	}
 
 }
