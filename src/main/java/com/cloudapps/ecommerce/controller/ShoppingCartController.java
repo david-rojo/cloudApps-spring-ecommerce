@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cloudapps.ecommerce.controller.dto.shoppingcart.ShoppingCartPostResponseDto;
 import com.cloudapps.ecommerce.controller.dto.shoppingcart.ShoppingCartResponseDto;
 import com.cloudapps.ecommerce.domain.shoppingcart.dto.NewShoppingCartDto;
+import com.cloudapps.ecommerce.domain.shoppingcart.dto.ShoppingCartDto;
 import com.cloudapps.ecommerce.service.ShoppingCartService;
 
 @RestController
@@ -29,28 +30,29 @@ public class ShoppingCartController {
 	@PostMapping(value="")
 	public ResponseEntity<ShoppingCartPostResponseDto> postShoppingCart() {
 		
-		NewShoppingCartDto shoppingCart = shoppingCarts.create();
+		NewShoppingCartDto newShoppingCart = shoppingCarts.create();
 		
 		ShoppingCartPostResponseDto shoppingCartPostResponseDto = new ShoppingCartPostResponseDto(
-				shoppingCart.getId(),
-				shoppingCart.isCompleted()); 
+				newShoppingCart.getId(),
+				newShoppingCart.isCompleted()); 
 
 		URI location = fromCurrentRequest().path("/{id}")
-				.buildAndExpand(shoppingCart.getId()).toUri();
+				.buildAndExpand(newShoppingCart.getId()).toUri();
 
 		return ResponseEntity.created(location).body(shoppingCartPostResponseDto);
 	}
 	
 	@PatchMapping(path = "/{id}")
-	public ShoppingCartResponseDto patchShoppingCart(@PathVariable String id) {
-		//TODO pending to implement
+	public ShoppingCartResponseDto completeShoppingCart(@PathVariable Long id) {
+		
+		ShoppingCartDto shoppingCart = shoppingCarts.complete(id);
+		
 		return null;
 	}
 	
 	@GetMapping(value="/{id}")
 	public ShoppingCartResponseDto getShoppingCart(@PathVariable(value="id") Long id) {
-		//TODO pending to implement
-		return null;
+		return shoppingCarts.findById(id).orElseThrow();
 	}
 	
 	@DeleteMapping(value="/{id}")

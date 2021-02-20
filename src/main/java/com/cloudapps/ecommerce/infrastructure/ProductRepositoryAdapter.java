@@ -16,8 +16,11 @@ public class ProductRepositoryAdapter implements ProductRepository {
 
 	private ProductJpaRepository productJpaRepository;
 	
-	public ProductRepositoryAdapter(ProductJpaRepository productJpaRepository) {
+	private ObjectMapper mapper;
+	
+	public ProductRepositoryAdapter(ProductJpaRepository productJpaRepository, ObjectMapper mapper) {
 		this.productJpaRepository = productJpaRepository;
+		this.mapper = mapper;
 	}
 	
 	@Override
@@ -31,7 +34,7 @@ public class ProductRepositoryAdapter implements ProductRepository {
 		
 		ProductEntity savedBookEntity = productJpaRepository.save(productEntity);
 		
-		return toFullProductDto(savedBookEntity);
+		return mapper.toFullProductDto(savedBookEntity);
 	}
 
 	@Override
@@ -40,7 +43,7 @@ public class ProductRepositoryAdapter implements ProductRepository {
 		List<ProductEntity> products = productJpaRepository.findAll();
 		return products
 				.stream()
-				.map(ProductRepositoryAdapter::toFullProductDto)
+				.map(mapper::toFullProductDto)
 				.collect(Collectors.toList());
 	}
 
@@ -48,22 +51,13 @@ public class ProductRepositoryAdapter implements ProductRepository {
 	public Optional<FullProductDto> findProductById(Long id) {
 		
 		Optional<ProductEntity> maybeAProduct = productJpaRepository.findById(id);
-		return maybeAProduct.map(ProductRepositoryAdapter::toFullProductDto);
+		return Optional.of(mapper.toFullProductDto(maybeAProduct.get()));
 	}
 
 	@Override
 	public void delete(Long id) {
 		
 		productJpaRepository.deleteById(id);		
-	}
-	
-	private static FullProductDto toFullProductDto(ProductEntity product) {
-		
-		return new FullProductDto(
-				product.getId(),
-				product.getName(),
-				product.getDescription(),
-				product.getQuantity());
 	}
 
 }

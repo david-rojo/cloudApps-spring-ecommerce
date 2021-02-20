@@ -55,6 +55,14 @@ public class ShoppingCartEntity {
 		this.completed = completed;
 	}
 
+	public List<ProductEntity> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<ProductEntity> products) {
+		this.products = products;
+	}
+	
 	public void addProduct(ProductEntity product) {
 		products.add(product);
 		product.setShoppingCart(this);
@@ -66,6 +74,6 @@ public class ShoppingCartEntity {
 			throw new NoSuchElementException();
 		}
 		product.setShoppingCart(null);
-	}	
+	}
 	
 }
