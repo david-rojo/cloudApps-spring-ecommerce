@@ -69,8 +69,8 @@ public class ShoppingCartController {
 			@PathVariable(value="cartId") Long cartId,
 			@PathVariable(value="productId") Long productId,
 			@PathVariable(value="prodQuantity") Long prodQuantity) {
-		//TODO pending to implement
-		return null;
+		FullShoppingCartDto shoppingCartDto = shoppingCarts.addProduct(cartId, productId, prodQuantity).orElseThrow();
+		return mapper.toShoppingCartResponseDto(shoppingCartDto);
 	}
 	
 	@DeleteMapping(value="/{cartId}/product/{productId}")

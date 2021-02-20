@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 import com.cloudapps.ecommerce.domain.shoppingcart.ShoppingCartRepository;
 import com.cloudapps.ecommerce.domain.shoppingcart.dto.FullShoppingCartDto;
 import com.cloudapps.ecommerce.domain.shoppingcart.dto.NewShoppingCartDto;
-import com.cloudapps.ecommerce.domain.shoppingcart.dto.ShoppingCartDto;
 import com.cloudapps.ecommerce.infrastructure.model.ShoppingCartEntity;
 import com.cloudapps.ecommerce.infrastructure.repository.ShoppingCartJpaRepository;
 

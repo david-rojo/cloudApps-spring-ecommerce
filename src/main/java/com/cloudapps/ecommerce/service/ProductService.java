@@ -2,12 +2,10 @@ package com.cloudapps.ecommerce.service;
 
 import java.util.Collection;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
 import com.cloudapps.ecommerce.controller.dto.product.ProductRequestDto;
-import com.cloudapps.ecommerce.controller.dto.product.ProductResponseDto;
 import com.cloudapps.ecommerce.domain.product.ProductUseCase;
 import com.cloudapps.ecommerce.domain.product.dto.FullProductDto;
 import com.cloudapps.ecommerce.domain.product.dto.ProductDto;

@@ -31,4 +31,11 @@ public class ShoppingCartService {
 
 		return shoppingCartUseCase.findShoppingCartById(id);
 	}
+
+	public Optional<FullShoppingCartDto> addProduct(Long cartId, Long productId, Long prodQuantity) {
+		
+		return shoppingCartUseCase.addProduct(cartId, productId, prodQuantity);
+	}
+	
+	
 }

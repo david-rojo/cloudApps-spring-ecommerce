@@ -1,7 +1,5 @@
 package com.cloudapps.ecommerce.controller.dto.product;
 
-import com.cloudapps.ecommerce.domain.product.dto.FullProductDto;
-
 public class ProductResponseDto {
 
 	private Long id;
@@ -40,11 +38,4 @@ public class ProductResponseDto {
 		this.description = description;
 	}	
 
-//	public static ProductResponseDto fromFullProductDto(FullProductDto fullProductDto) {
-//		return new ProductResponseDto(
-//				fullProductDto.getId(),
-//				fullProductDto.getName(),
-//				fullProductDto.getDescription(),
-//				fullProductDto.getQuantity());
-//	}
 }

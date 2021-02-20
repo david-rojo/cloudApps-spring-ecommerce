@@ -1,11 +1,8 @@
 package com.cloudapps.ecommerce.controller.dto.shoppingcart;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.cloudapps.ecommerce.controller.dto.product.ProductResponseDto;
-import com.cloudapps.ecommerce.domain.shoppingcart.dto.ShoppingCartDto;
 
 public class ShoppingCartResponseDto {
 	
@@ -46,18 +43,5 @@ public class ShoppingCartResponseDto {
 	public void setProducts(List<ProductResponseDto> products) {
 		this.products = products;
 	}
-	
-//	public static ShoppingCartResponseDto fromShoppingCartDto(ShoppingCartDto shoppingCartDto) {
-//		List<ProductResponseDto> listProductDto = shoppingCartDto
-//				.getProducts()
-//				.stream()
-//				.map(ProductResponseDto::fromFullProductDto)
-//				.collect(Collectors.toList());
-//		
-//		return new ShoppingCartResponseDto(
-//				shoppingCartDto.getId(),
-//				shoppingCartDto.isCompleted(),
-//				listProductDto);
-//	}
 
 }
