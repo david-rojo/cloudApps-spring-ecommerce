@@ -27,6 +27,9 @@ public class ShoppingCartController {
 	@Autowired
 	private ShoppingCartService shoppingCarts;
 	
+	@Autowired
+	private ControllerObjectMapper mapper;
+	
 	@PostMapping(value="")
 	public ResponseEntity<ShoppingCartPostResponseDto> postShoppingCart() {
 		
@@ -46,8 +49,7 @@ public class ShoppingCartController {
 	public ShoppingCartResponseDto completeShoppingCart(@PathVariable Long id) {
 		
 		ShoppingCartDto shoppingCart = shoppingCarts.complete(id);
-		
-		return null;
+		return mapper.toShoppingCartResponseDto(shoppingCart);
 	}
 	
 	@GetMapping(value="/{id}")

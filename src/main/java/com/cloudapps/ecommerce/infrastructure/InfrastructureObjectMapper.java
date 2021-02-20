@@ -11,7 +11,7 @@ import com.cloudapps.ecommerce.infrastructure.model.ProductEntity;
 import com.cloudapps.ecommerce.infrastructure.model.ShoppingCartEntity;
 
 @Component
-public class ObjectMapper {
+public class InfrastructureObjectMapper {
 	
 	public FullProductDto toFullProductDto(ProductEntity product) {
 		return product == null ? null : new FullProductDto(
@@ -34,6 +34,29 @@ public class ObjectMapper {
 					shoppingCart.getId(),
 					shoppingCart.isCompleted(),
 					listProductDto);
+		}
+	}
+
+	public ProductEntity toProductEntity(FullProductDto fullProductDto) {
+		return fullProductDto == null ? null : new ProductEntity(
+				fullProductDto.getId(),
+				fullProductDto.getName(),
+				fullProductDto.getDescription(),
+				fullProductDto.getQuantity());
+	}
+	
+	public ShoppingCartEntity toShoppingCartEntity(ShoppingCartDto shoppingCartDto) {
+		if (shoppingCartDto == null) {
+			return null;
+		}
+		else {
+			List<ProductEntity> listProductEntity = new ArrayList<>();
+			shoppingCartDto.getProducts().forEach(productDto -> listProductEntity.add(this.toProductEntity(productDto)));
+		
+			return new ShoppingCartEntity(
+					shoppingCartDto.getId(),
+					shoppingCartDto.isCompleted(),
+					listProductEntity);
 		}
 	}
 

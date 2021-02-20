@@ -15,15 +15,15 @@ public class ShoppingCartRepositoryAdapter implements ShoppingCartRepository {
 
 	private ShoppingCartJpaRepository shoppingCartJpaRepository;
 	
-	private ObjectMapper mapper;
+	private InfrastructureObjectMapper mapper;
 	
-	public ShoppingCartRepositoryAdapter(ShoppingCartJpaRepository shoppingCartJpaRepository, ObjectMapper mapper) {
+	public ShoppingCartRepositoryAdapter(ShoppingCartJpaRepository shoppingCartJpaRepository, InfrastructureObjectMapper mapper) {
 		this.shoppingCartJpaRepository = shoppingCartJpaRepository;
 		this.mapper = mapper;
 	}
 	
 	@Override
-	public NewShoppingCartDto save() {
+	public NewShoppingCartDto create() {
 		
 		ShoppingCartEntity savedShoppingCartEntity = shoppingCartJpaRepository.save(new ShoppingCartEntity(false));
 		return new NewShoppingCartDto(
@@ -35,6 +35,13 @@ public class ShoppingCartRepositoryAdapter implements ShoppingCartRepository {
 	public Optional<ShoppingCartDto> findShoppingCartById(Long id) {
 		Optional<ShoppingCartEntity> maybeAShoppingCart = shoppingCartJpaRepository.findById(id);
 		return Optional.of(mapper.toShoppingCartDto(maybeAShoppingCart.get()));
+	}
+
+	@Override
+	public ShoppingCartDto save(ShoppingCartDto shoppingCartDto) {
+		ShoppingCartEntity updatedShoppingCartEntity = shoppingCartJpaRepository
+				.save(mapper.toShoppingCartEntity(shoppingCartDto));
+		return mapper.toShoppingCartDto(updatedShoppingCartEntity);
 	}
 
 }

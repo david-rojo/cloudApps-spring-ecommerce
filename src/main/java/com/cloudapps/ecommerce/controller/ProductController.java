@@ -27,6 +27,9 @@ public class ProductController {
 	@Autowired
 	private ProductService products;
 	
+	@Autowired
+	private ControllerObjectMapper mapper;
+	
 	@GetMapping(value="")
 	public Collection<ProductResponseDto> getProducts() {
 		return products.findAll();
@@ -36,17 +39,12 @@ public class ProductController {
 	public ResponseEntity<ProductResponseDto> postProduct(@RequestBody ProductRequestDto productRequestDto) {
 		
 		FullProductDto fullProduct = products.create(productRequestDto);
-		
-		ProductResponseDto responseProductDto = new ProductResponseDto(
-				fullProduct.getId(), 
-				fullProduct.getName(), 
-				fullProduct.getDescription(), 
-				fullProduct.getQuantity()); 
 
 		URI location = fromCurrentRequest().path("/{id}")
 				.buildAndExpand(fullProduct.getId()).toUri();
 
-		return ResponseEntity.created(location).body(responseProductDto);
+		return ResponseEntity.created(location).body(
+				mapper.toProductResponseDto(fullProduct));
 	}
 	
 	@GetMapping(value="/{id}")
@@ -59,7 +57,6 @@ public class ProductController {
 		
 		ProductResponseDto product = products.findById(id).orElseThrow();
 		products.deleteById(id);
-		return product;
-		
+		return product;		
 	}
 }

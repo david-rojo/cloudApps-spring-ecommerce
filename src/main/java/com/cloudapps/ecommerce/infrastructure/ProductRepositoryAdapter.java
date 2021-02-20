@@ -16,9 +16,9 @@ public class ProductRepositoryAdapter implements ProductRepository {
 
 	private ProductJpaRepository productJpaRepository;
 	
-	private ObjectMapper mapper;
+	private InfrastructureObjectMapper mapper;
 	
-	public ProductRepositoryAdapter(ProductJpaRepository productJpaRepository, ObjectMapper mapper) {
+	public ProductRepositoryAdapter(ProductJpaRepository productJpaRepository, InfrastructureObjectMapper mapper) {
 		this.productJpaRepository = productJpaRepository;
 		this.mapper = mapper;
 	}

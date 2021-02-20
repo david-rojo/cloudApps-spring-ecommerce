@@ -15,12 +15,15 @@ public class ShoppingCartUseCaseImpl implements ShoppingCartUseCase {
 	
 	@Override
 	public NewShoppingCartDto createShoppingCart() {
-		return shoppingCartRepository.save();
+		return shoppingCartRepository.create();
 	}
 
 	@Override
 	public ShoppingCartDto complete(Long id) {
-		return null;
+		
+		ShoppingCartDto shoppingCart = shoppingCartRepository.findShoppingCartById(id).orElseThrow();
+		shoppingCart.setCompleted(true);
+		return shoppingCartRepository.save(shoppingCart);
 	}
 
 	@Override
