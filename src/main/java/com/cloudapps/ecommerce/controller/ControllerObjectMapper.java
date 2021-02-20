@@ -5,8 +5,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.cloudapps.ecommerce.controller.dto.cartitem.CartItemResponseDto;
 import com.cloudapps.ecommerce.controller.dto.product.ProductResponseDto;
 import com.cloudapps.ecommerce.controller.dto.shoppingcart.ShoppingCartResponseDto;
+import com.cloudapps.ecommerce.domain.cartitem.dto.FullCartItemDto;
 import com.cloudapps.ecommerce.domain.product.dto.FullProductDto;
 import com.cloudapps.ecommerce.domain.shoppingcart.dto.FullShoppingCartDto;
 
@@ -22,13 +24,22 @@ public class ControllerObjectMapper {
 				fullProduct.getDescription());
 	}
 	
+	public CartItemResponseDto toCartItemResponseDto(FullCartItemDto fullCartItem) {
+		
+		return new CartItemResponseDto(
+				fullCartItem.getId(),
+				fullCartItem.getQuantity(),
+				this.toProductResponseDto(fullCartItem.getProduct()));
+	}
+	
 	public ShoppingCartResponseDto toShoppingCartResponseDto(FullShoppingCartDto shoppingCart) {
-		List<ProductResponseDto> listProductResponseDto = new ArrayList<>();
-		shoppingCart.getProducts().forEach(fullProduct -> listProductResponseDto.add(this.toProductResponseDto(fullProduct)));
+		List<CartItemResponseDto> listCartItemResponseDto = new ArrayList<>();
+		shoppingCart.getCartItems().forEach(fullCartItem
+				-> listCartItemResponseDto.add(this.toCartItemResponseDto(fullCartItem)));
 	
 		return new ShoppingCartResponseDto(
 				shoppingCart.getId(),
 				shoppingCart.isCompleted(),
-				listProductResponseDto);
+				listCartItemResponseDto);
 	}
 }

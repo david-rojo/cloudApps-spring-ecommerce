@@ -34,14 +34,14 @@ public class ShoppingCartRepositoryAdapter implements ShoppingCartRepository {
 	@Override
 	public Optional<FullShoppingCartDto> findShoppingCartById(Long id) {
 		Optional<ShoppingCartEntity> maybeAShoppingCart = shoppingCartJpaRepository.findById(id);
-		return Optional.of(mapper.toShoppingCartDto(maybeAShoppingCart.get()));
+		return Optional.of(mapper.toFullShoppingCartDto(maybeAShoppingCart.get()));
 	}
 
 	@Override
 	public FullShoppingCartDto save(FullShoppingCartDto shoppingCartDto) {
 		ShoppingCartEntity updatedShoppingCartEntity = shoppingCartJpaRepository
 				.save(mapper.toShoppingCartEntity(shoppingCartDto));
-		return mapper.toShoppingCartDto(updatedShoppingCartEntity);
+		return mapper.toFullShoppingCartDto(updatedShoppingCartEntity);
 	}
 
 }

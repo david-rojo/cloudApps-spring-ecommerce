@@ -2,19 +2,19 @@ package com.cloudapps.ecommerce.domain.shoppingcart.dto;
 
 import java.util.List;
 
-import com.cloudapps.ecommerce.domain.product.dto.FullProductDto;
+import com.cloudapps.ecommerce.domain.cartitem.dto.CartItemDto;
 
 public class ShoppingCartDto {
 	
 	private boolean completed;
 	
-	private List<FullProductDto> products;
+	private List<CartItemDto> cartItems;
 	
 	public ShoppingCartDto() {}
 
-	public ShoppingCartDto(boolean completed, List<FullProductDto> products) {
+	public ShoppingCartDto(boolean completed, List<CartItemDto> cartItems) {
 		this.completed = completed;
-		this.products = products;
+		this.cartItems = cartItems;
 	}
 
 	public boolean isCompleted() {
@@ -25,12 +25,12 @@ public class ShoppingCartDto {
 		this.completed = completed;
 	}
 
-	public List<FullProductDto> getProducts() {
-		return products;
+	public List<CartItemDto> getCartItems() {
+		return cartItems;
 	}
 
-	public void setProducts(List<FullProductDto> products) {
-		this.products = products;
+	public void setCartItems(List<CartItemDto> cartItems) {
+		this.cartItems = cartItems;
 	}
 
 }

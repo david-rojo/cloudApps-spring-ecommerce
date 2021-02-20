@@ -2,6 +2,8 @@ package com.cloudapps.ecommerce.domain.shoppingcart;
 
 import java.util.Optional;
 
+import com.cloudapps.ecommerce.domain.cartitem.CartItemRepository;
+import com.cloudapps.ecommerce.domain.cartitem.dto.FullCartItemDto;
 import com.cloudapps.ecommerce.domain.product.ProductRepository;
 import com.cloudapps.ecommerce.domain.product.dto.FullProductDto;
 import com.cloudapps.ecommerce.domain.shoppingcart.dto.FullShoppingCartDto;
@@ -13,9 +15,13 @@ public class ShoppingCartUseCaseImpl implements ShoppingCartUseCase {
 	
 	private ProductRepository productRepository;
 	
-	public ShoppingCartUseCaseImpl(ShoppingCartRepository shoppingCartRepository, ProductRepository productRepository) {
+	private CartItemRepository cartItemRepository;
+	
+	public ShoppingCartUseCaseImpl(ShoppingCartRepository shoppingCartRepository,
+			ProductRepository productRepository, CartItemRepository cartItemRepository) {
 		this.shoppingCartRepository = shoppingCartRepository;
 		this.productRepository = productRepository;
+		this.cartItemRepository = cartItemRepository;
 	}
 	
 	@Override
@@ -37,19 +43,29 @@ public class ShoppingCartUseCaseImpl implements ShoppingCartUseCase {
 	}
 
 	@Override
-	public Optional<FullShoppingCartDto> addProduct(Long shoppingCartId, Long productId, Long prodQuantity) {
+	public Optional<FullShoppingCartDto> addProduct(Long shoppingCartId, Long productId, int prodQuantity) {
 		
 		Optional<FullProductDto> fullProductDto = this.productRepository.findProductById(productId);
-        Optional<FullShoppingCartDto> shoppingCartDto = this.shoppingCartRepository.findShoppingCartById(shoppingCartId);
+        Optional<FullShoppingCartDto> shoppingCartDto = this.shoppingCartRepository
+        		.findShoppingCartById(shoppingCartId);
         
-        fullProductDto.ifPresent(product -> shoppingCartDto.ifPresent(cart -> {
-            for (int i = 0; i < prodQuantity; i++) {
-                cart.getProducts().add(product);
-            }
-            this.shoppingCartRepository.save(cart);
-        }));
-
-        return shoppingCartDto;
+        
+        if (fullProductDto.isPresent() && shoppingCartDto.isPresent()) {
+        	Optional<FullCartItemDto> existingCartItem = shoppingCartDto.get().contains(productId);
+        	if (existingCartItem.isPresent()) {
+        		shoppingCartDto.get().updateQuantity(existingCartItem.get().getId(), prodQuantity);
+        	}
+        	else {
+        		FullCartItemDto newCartItem = new FullCartItemDto(prodQuantity, fullProductDto.get(), shoppingCartDto.get());
+        		FullCartItemDto savedCartItem = cartItemRepository.save(newCartItem);
+        		shoppingCartDto.get().addItem(savedCartItem);
+        	}
+        	shoppingCartRepository.save(shoppingCartDto.get());
+        }
+        
+        Optional<FullShoppingCartDto> result = this.shoppingCartRepository
+        		.findShoppingCartById(shoppingCartId);
+        return result;
 	}
 
 }

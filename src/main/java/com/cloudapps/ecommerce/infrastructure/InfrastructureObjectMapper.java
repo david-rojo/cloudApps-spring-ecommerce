@@ -5,8 +5,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.cloudapps.ecommerce.domain.cartitem.dto.FullCartItemDto;
 import com.cloudapps.ecommerce.domain.product.dto.FullProductDto;
 import com.cloudapps.ecommerce.domain.shoppingcart.dto.FullShoppingCartDto;
+import com.cloudapps.ecommerce.infrastructure.model.CartItemEntity;
 import com.cloudapps.ecommerce.infrastructure.model.ProductEntity;
 import com.cloudapps.ecommerce.infrastructure.model.ShoppingCartEntity;
 
@@ -20,41 +22,61 @@ public class InfrastructureObjectMapper {
 				product.getDescription());
 	}
 	
-	public FullShoppingCartDto toShoppingCartDto(ShoppingCartEntity shoppingCart) {
+	public FullCartItemDto toFullCartItemDto(CartItemEntity cartItem) {
+		
+		return cartItem == null ? null : new FullCartItemDto(
+					cartItem.getId(),
+					cartItem.getQuantity(),
+					this.toFullProductDto(cartItem.getProduct()),
+					null);
+	}
+	
+	public FullShoppingCartDto toFullShoppingCartDto(ShoppingCartEntity shoppingCart) {
 
 		if (shoppingCart == null) {
 			return null;
 		}
 		else {
-			List<FullProductDto> listProductDto = new ArrayList<>();
-			shoppingCart.getProducts().forEach(productEntity -> listProductDto.add(this.toFullProductDto(productEntity)));
+			List<FullCartItemDto> listCartItemDto = new ArrayList<>();
+			shoppingCart.getCartItems().forEach(cartItemEntity
+					-> listCartItemDto.add(this.toFullCartItemDto(cartItemEntity)));
 		
 			return new FullShoppingCartDto(
 					shoppingCart.getId(),
 					shoppingCart.isCompleted(),
-					listProductDto);
+					listCartItemDto);
 		}
 	}
 
 	public ProductEntity toProductEntity(FullProductDto fullProductDto) {
+		
 		return fullProductDto == null ? null : new ProductEntity(
 				fullProductDto.getId(),
 				fullProductDto.getName(),
 				fullProductDto.getDescription());
 	}
 	
+	public CartItemEntity toCartItemEntity(FullCartItemDto fullCartItemDto) {
+		return fullCartItemDto == null ? null : new CartItemEntity(
+				fullCartItemDto.getId(),
+				this.toProductEntity(fullCartItemDto.getProduct()),
+				fullCartItemDto.getQuantity(), null);
+	}
+	
 	public ShoppingCartEntity toShoppingCartEntity(FullShoppingCartDto shoppingCartDto) {
+		
 		if (shoppingCartDto == null) {
 			return null;
 		}
 		else {
-			List<ProductEntity> listProductEntity = new ArrayList<>();
-			shoppingCartDto.getProducts().forEach(productDto -> listProductEntity.add(this.toProductEntity(productDto)));
+			List<CartItemEntity> listCartItemEntity = new ArrayList<>();
+			shoppingCartDto.getCartItems().forEach(cartItemDto
+					-> listCartItemEntity.add(this.toCartItemEntity(cartItemDto)));
 		
 			return new ShoppingCartEntity(
 					shoppingCartDto.getId(),
 					shoppingCartDto.isCompleted(),
-					listProductEntity);
+					listCartItemEntity);
 		}
 	}
 

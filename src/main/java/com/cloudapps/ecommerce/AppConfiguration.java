@@ -3,6 +3,7 @@ package com.cloudapps.ecommerce;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.cloudapps.ecommerce.domain.cartitem.CartItemRepository;
 import com.cloudapps.ecommerce.domain.product.ProductRepository;
 import com.cloudapps.ecommerce.domain.product.ProductUseCase;
 import com.cloudapps.ecommerce.domain.product.ProductUseCaseImpl;
@@ -19,8 +20,8 @@ public class AppConfiguration {
 	}
 	
 	@Bean
-	public ShoppingCartUseCase shoppingCartUseCase(ShoppingCartRepository repositoryAdapter,
-			ProductRepository productRepositoryAdapter) {
-		return new ShoppingCartUseCaseImpl(repositoryAdapter, productRepositoryAdapter);
+	public ShoppingCartUseCase shoppingCartUseCase(ShoppingCartRepository shoppingCartRepositoryAdapter,
+			ProductRepository productRepositoryAdapter, CartItemRepository cartItemRepository) {
+		return new ShoppingCartUseCaseImpl(shoppingCartRepositoryAdapter, productRepositoryAdapter, cartItemRepository);
 	}
 }

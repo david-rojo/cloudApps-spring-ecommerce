@@ -4,14 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -24,12 +21,13 @@ public class ShoppingCartEntity {
 	
 	private boolean completed;
 	
-	@ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-    		name = "shopping_cart_product",
-            joinColumns = {@JoinColumn(name = "shopping_cart_id")},
-            inverseJoinColumns = {@JoinColumn(name = "product_id")})
-    private List<ProductEntity> products;
+//	@ManyToMany(cascade = { CascadeType.ALL })
+//    @JoinTable(name = "shopping_cart_cart_item",
+//            joinColumns = {@JoinColumn(name = "shopping_cart_id")},
+//            inverseJoinColumns = {@JoinColumn(name = "cart_item_id")})
+//    private List<CartItemEntity> cartItems;
+	@OneToMany(mappedBy = "shoppingCart")
+	private  List<CartItemEntity> cartItems;
 	
 	public ShoppingCartEntity() {}
 
@@ -41,10 +39,10 @@ public class ShoppingCartEntity {
 		this(null, completed, new ArrayList<>());
 	}
 	
-	public ShoppingCartEntity(Long id, boolean completed, List<ProductEntity> products) {
+	public ShoppingCartEntity(Long id, boolean completed, List<CartItemEntity> cartItems) {
 		this.id = id;
 		this.completed = completed;
-		this.products = products;
+		this.cartItems = cartItems;
 	}
 
 	public Long getId() {
@@ -63,20 +61,20 @@ public class ShoppingCartEntity {
 		this.completed = completed;
 	}
 
-	public List<ProductEntity> getProducts() {
-		return products;
+	public List<CartItemEntity> getCartItems() {
+		return cartItems;
 	}
 
-	public void setProducts(List<ProductEntity> products) {
-		this.products = products;
+	public void setCartItems(List<CartItemEntity> cartItems) {
+		this.cartItems = cartItems;
 	}
 	
-	public void addProduct(ProductEntity product) {
-		products.add(product);
+	public void addCartItem(CartItemEntity cartItem) {
+		cartItems.add(cartItem);
 	}
 	
-	public void removeProduct(ProductEntity product) {
-		boolean removed = products.remove(product);
+	public void removeCartItem(CartItemEntity cartItem) {
+		boolean removed = cartItems.remove(cartItem);
 		if(!removed) {
 			throw new NoSuchElementException();
 		}

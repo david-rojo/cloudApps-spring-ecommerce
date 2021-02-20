@@ -68,8 +68,9 @@ public class ShoppingCartController {
 	public ShoppingCartResponseDto postProductToShoppingCart(
 			@PathVariable(value="cartId") Long cartId,
 			@PathVariable(value="productId") Long productId,
-			@PathVariable(value="prodQuantity") Long prodQuantity) {
-		FullShoppingCartDto shoppingCartDto = shoppingCarts.addProduct(cartId, productId, prodQuantity).orElseThrow();
+			@PathVariable(value="prodQuantity") int prodQuantity) {
+		FullShoppingCartDto shoppingCartDto = shoppingCarts
+				.addProduct(cartId, productId, prodQuantity).orElseThrow();
 		return mapper.toShoppingCartResponseDto(shoppingCartDto);
 	}
 	

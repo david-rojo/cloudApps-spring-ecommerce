@@ -2,7 +2,7 @@ package com.cloudapps.ecommerce.controller.dto.shoppingcart;
 
 import java.util.List;
 
-import com.cloudapps.ecommerce.controller.dto.product.ProductResponseDto;
+import com.cloudapps.ecommerce.controller.dto.cartitem.CartItemResponseDto;
 
 public class ShoppingCartResponseDto {
 	
@@ -10,14 +10,14 @@ public class ShoppingCartResponseDto {
 	
 	private boolean completed;
 	
-	private List<ProductResponseDto> products;
+	private List<CartItemResponseDto> cartItems;
 	
 	public ShoppingCartResponseDto() {}
 
-	public ShoppingCartResponseDto(Long id, boolean completed, List<ProductResponseDto> products) {
+	public ShoppingCartResponseDto(Long id, boolean completed, List<CartItemResponseDto> cartItems) {
 		this.id = id;
 		this.completed = completed;
-		this.products = products;
+		this.cartItems = cartItems;
 	}
 
 	public Long getId() {
@@ -36,12 +36,12 @@ public class ShoppingCartResponseDto {
 		this.completed = completed;
 	}
 
-	public List<ProductResponseDto> getProducts() {
-		return products;
+	public List<CartItemResponseDto> getCartItems() {
+		return cartItems;
 	}
 
-	public void setProducts(List<ProductResponseDto> products) {
-		this.products = products;
+	public void setCartItems(List<CartItemResponseDto> cartItems) {
+		this.cartItems = cartItems;
 	}
 
 }

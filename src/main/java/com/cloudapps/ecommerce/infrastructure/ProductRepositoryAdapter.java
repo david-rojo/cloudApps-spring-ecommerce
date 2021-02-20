@@ -26,14 +26,8 @@ public class ProductRepositoryAdapter implements ProductRepository {
 	@Override
 	public FullProductDto save(FullProductDto product) {
 		
-		ProductEntity productEntity = new ProductEntity(
-				product.getId(),
-				product.getName(),
-				product.getDescription());
-		
-		ProductEntity savedBookEntity = productJpaRepository.save(productEntity);
-		
-		return mapper.toFullProductDto(savedBookEntity);
+		ProductEntity savedProductEntity = productJpaRepository.save(mapper.toProductEntity(product));		
+		return mapper.toFullProductDto(savedProductEntity);
 	}
 
 	@Override
