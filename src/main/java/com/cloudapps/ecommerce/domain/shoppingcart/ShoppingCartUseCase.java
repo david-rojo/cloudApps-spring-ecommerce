@@ -18,5 +18,5 @@ public interface ShoppingCartUseCase {
 	
 	public Optional<FullShoppingCartDto> deleteProduct(Long shoppingCartId, Long productId);
 
-	public void delete(Long id);
+	public Optional<FullShoppingCartDto> delete(Long shoppingCartId);
 }

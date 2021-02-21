@@ -80,7 +80,7 @@ public class ShoppingCartUseCaseImpl implements ShoppingCartUseCase {
         	shoppingCartRepository.save(shoppingCartDto.get());
         }
         
-        return this.shoppingCartRepository.findShoppingCartById(shoppingCartId);
+        return shoppingCartDto;
 	}
 
 	@Override
@@ -102,9 +102,13 @@ public class ShoppingCartUseCaseImpl implements ShoppingCartUseCase {
 	}
 
 	@Override
-	public void delete(Long id) {
-	
-		shoppingCartRepository.delete(id);		
+	public Optional<FullShoppingCartDto> delete(Long shoppingCartId) {
+
+		Optional<FullShoppingCartDto> shoppingCart = shoppingCartRepository.findShoppingCartById(shoppingCartId);
+        if (shoppingCart.isPresent()) {
+        	shoppingCartRepository.delete(shoppingCart.get());
+        }
+        return shoppingCart;
 	}
 
 }

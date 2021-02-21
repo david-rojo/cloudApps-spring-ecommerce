@@ -13,6 +13,6 @@ public interface ShoppingCartRepository {
 	
 	public FullShoppingCartDto save(FullShoppingCartDto shoppingCartDto);
 	
-	public void delete(Long id);
+	public FullShoppingCartDto delete(FullShoppingCartDto shoppingCartDto);
 	
 }

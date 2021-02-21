@@ -45,9 +45,10 @@ public class ShoppingCartRepositoryAdapter implements ShoppingCartRepository {
 	}
 
 	@Override
-	public void delete(Long id) {
+	public FullShoppingCartDto delete(FullShoppingCartDto shoppingCartDto) {
 		
-		shoppingCartJpaRepository.deleteById(id);
+		this.shoppingCartJpaRepository.delete(mapper.toShoppingCartEntity(shoppingCartDto));
+        return shoppingCartDto;
 	}
 
 }

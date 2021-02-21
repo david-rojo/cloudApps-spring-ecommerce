@@ -1,7 +1,6 @@
 package com.cloudapps.ecommerce.domain.product;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.when;
 
 import java.util.Optional;
@@ -53,7 +52,7 @@ class ProductUseCaseImplTest {
        
 		FullProductDto product = new FullProductDto(Long.valueOf(1), "test-name", "test-description", 15);
 
-        when(productRepository.findProductById(isA(Long.class))).thenReturn(Optional.of(product));
+        when(productRepository.findProductById(Long.valueOf(1))).thenReturn(Optional.of(product));
         when(productRepository.delete(any())).thenReturn(product);
         
         FullProductDto deletedProduct = productUseCase.deleteProduct(Long.valueOf(1)).get();
@@ -67,7 +66,7 @@ class ProductUseCaseImplTest {
 	@DisplayName("Given not existing product when delete then return empty, expected ok")
     void givenNotExistingProductWhenDeleteThenReturnEmpty() {
 		
-        when(productRepository.findProductById(isA(Long.class))).thenReturn(Optional.empty());
+        when(productRepository.findProductById(Long.valueOf(1))).thenReturn(Optional.empty());
         
         Optional<FullProductDto> deletedProduct = productUseCase.deleteProduct(Long.valueOf(1));
         Assertions.assertNotNull(deletedProduct);
