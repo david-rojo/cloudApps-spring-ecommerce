@@ -12,7 +12,7 @@ mvn spring-boot:run
 mvn test
 ```
 
-# H2 database
+## H2 database
 
 H2 console connection details:
 
