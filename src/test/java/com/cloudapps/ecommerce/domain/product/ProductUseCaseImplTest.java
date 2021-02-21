@@ -1,7 +1,7 @@
 package com.cloudapps.ecommerce.domain.product;
 
-import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.when;
 
 import java.util.Optional;
@@ -41,8 +41,10 @@ class ProductUseCaseImplTest {
         when(this.productRepository.save(any())).thenReturn(savedProduct);
 
         FullProductDto productToSave = productUseCase.createProduct(newProduct);
+        Assertions.assertNotNull(productToSave);
         Assertions.assertEquals(productToSave.getName(), newProduct.getName());
         Assertions.assertEquals(productToSave.getDescription(), newProduct.getDescription());
+        Assertions.assertEquals(productToSave.getPrice(), newProduct.getPrice());
     }
 	
 	@Test
@@ -55,8 +57,10 @@ class ProductUseCaseImplTest {
         when(productRepository.delete(any())).thenReturn(product);
         
         FullProductDto deletedProduct = productUseCase.deleteProduct(Long.valueOf(1)).get();
+        Assertions.assertNotNull(deletedProduct);
         Assertions.assertEquals(deletedProduct.getName(), product.getName());
         Assertions.assertEquals(deletedProduct.getDescription(), product.getDescription());
+        Assertions.assertEquals(deletedProduct.getPrice(), product.getPrice());
     }
 	
 	@Test
@@ -66,6 +70,7 @@ class ProductUseCaseImplTest {
         when(productRepository.findProductById(isA(Long.class))).thenReturn(Optional.empty());
         
         Optional<FullProductDto> deletedProduct = productUseCase.deleteProduct(Long.valueOf(1));
+        Assertions.assertNotNull(deletedProduct);
         Assertions.assertEquals(deletedProduct, Optional.empty());
     }
 
