@@ -21,7 +21,8 @@ public class ControllerObjectMapper {
 		return new ProductResponseDto(
 				fullProduct.getId(), 
 				fullProduct.getName(), 
-				fullProduct.getDescription());
+				fullProduct.getDescription(),
+				fullProduct.getPrice());
 	}
 	
 	public CartItemResponseDto toCartItemResponseDto(FullCartItemDto fullCartItem) {

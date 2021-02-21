@@ -7,11 +7,14 @@ public class ProductResponseDto {
 	private String name;
 	
 	private String description;
+	
+	private double price;
 
-	public ProductResponseDto(Long id, String name, String description) {
+	public ProductResponseDto(Long id, String name, String description, double price) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
+		this.price = price;
 	}
 
 	public Long getId() {
@@ -36,6 +39,14 @@ public class ProductResponseDto {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}	
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
 
 }

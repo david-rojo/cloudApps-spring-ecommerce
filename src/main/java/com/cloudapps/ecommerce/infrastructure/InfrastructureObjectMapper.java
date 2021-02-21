@@ -19,7 +19,8 @@ public class InfrastructureObjectMapper {
 		return product == null ? null : new FullProductDto(
 				product.getId(),
 				product.getName(),
-				product.getDescription());
+				product.getDescription(),
+				product.getPrice());
 	}
 	
 	public FullCartItemDto toFullCartItemDto(CartItemEntity cartItem) {
@@ -53,7 +54,8 @@ public class InfrastructureObjectMapper {
 		return fullProductDto == null ? null : new ProductEntity(
 				fullProductDto.getId(),
 				fullProductDto.getName(),
-				fullProductDto.getDescription());
+				fullProductDto.getDescription(),
+				fullProductDto.getPrice());
 	}
 	
 	public CartItemEntity toCartItemEntity(FullCartItemDto fullCartItemDto) {

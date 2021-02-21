@@ -35,8 +35,8 @@ class ProductUseCaseImplTest {
 	@DisplayName("Given new product when saved then return saved product, expected ok")
     void givenNewProductWhenSavedThenReturnSavedProduct() {
         
-		ProductDto newProduct = new ProductDto("test-name", "test-description");
-        FullProductDto savedProduct = new FullProductDto(Long.valueOf(1), "test-name", "test-description");
+		ProductDto newProduct = new ProductDto("test-name", "test-description", 15);
+        FullProductDto savedProduct = new FullProductDto(Long.valueOf(1), "test-name", "test-description", 15);
 
         when(this.productRepository.save(any())).thenReturn(savedProduct);
 
@@ -49,7 +49,7 @@ class ProductUseCaseImplTest {
 	@DisplayName("Given existing product when delete then return product, expected ok")
     void givenExistingProductWhenDeleteThenReturnProduct() {
        
-		FullProductDto product = new FullProductDto(Long.valueOf(1), "test-name", "test-description");
+		FullProductDto product = new FullProductDto(Long.valueOf(1), "test-name", "test-description", 15);
 
         when(productRepository.findProductById(isA(Long.class))).thenReturn(Optional.of(product));
         when(productRepository.delete(any())).thenReturn(product);

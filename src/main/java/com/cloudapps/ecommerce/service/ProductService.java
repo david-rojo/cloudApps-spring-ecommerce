@@ -31,7 +31,8 @@ public class ProductService {
 		
 		ProductDto productDto = new ProductDto(
 				product.getName(),
-				product.getDescription());
+				product.getDescription(),
+				product.getPrice());
 		
 		return productUseCase.createProduct(productDto);
 	}

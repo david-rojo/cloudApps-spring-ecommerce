@@ -18,19 +18,22 @@ public class ProductEntity {
 	
 	private String description;
 	
+	private double price;
+	
 //	@ManyToMany(mappedBy = "products")
 //    private List<ShoppingCartEntity> shoppingCarts;
 	
 	public ProductEntity() {}
 	
-	public ProductEntity(String name, String description) {
-		this(null, name, description);
+	public ProductEntity(String name, String description, double price) {
+		this(null, name, description, price);
 	}
 
-	public ProductEntity(Long id, String name, String description) {
+	public ProductEntity(Long id, String name, String description, double price) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
+		this.price = price;
 	}
 
 	public Long getId() {
@@ -57,9 +60,17 @@ public class ProductEntity {
 		this.description = description;
 	}
 
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
 	@Override
 	public String toString() {
-		return String.format("Product [id=%s, name=%s, description=%s]", id, name, description);
+		return String.format("Product [id=%s, name=%s, description=%s, price=%d]", id, name, description, price);
 	}
 	
 }
