@@ -22,7 +22,7 @@ import com.cloudapps.ecommerce.domain.product.dto.ProductDto;
 class ProductUseCaseImplTest {
 	
 	@Mock
-    ProductRepository productRepository;
+    private ProductRepository productRepository;
 	
 	private ProductUseCase productUseCase;
 	

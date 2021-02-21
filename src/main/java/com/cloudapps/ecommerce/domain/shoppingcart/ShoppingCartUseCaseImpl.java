@@ -46,7 +46,7 @@ public class ShoppingCartUseCaseImpl implements ShoppingCartUseCase {
 				.orElseThrow();
 		boolean validated = availabilityService.check(shoppingCart.getCartItems());
 		if (!validated) {
-			log.error("Not validated shopping cart");
+			log.warn("Not validated shopping cart");
 			throw new NotValidatedShoppingCartException();
 		}
 		log.info("validated shopping cart");
