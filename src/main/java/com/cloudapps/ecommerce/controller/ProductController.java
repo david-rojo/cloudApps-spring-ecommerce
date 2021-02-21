@@ -61,7 +61,7 @@ public class ProductController {
 	public ProductResponseDto deleteProduct(@PathVariable(value="id") Long id) {
 		
 		FullProductDto fullProductDto = products.findById(id).orElseThrow();
-		products.deleteById(id);
+		products.delete(id);
 		return mapper.toProductResponseDto(fullProductDto);		
 	}
 }

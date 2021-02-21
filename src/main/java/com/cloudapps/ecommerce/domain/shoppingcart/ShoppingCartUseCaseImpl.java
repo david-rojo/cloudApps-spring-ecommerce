@@ -84,4 +84,10 @@ public class ShoppingCartUseCaseImpl implements ShoppingCartUseCase {
 		return this.shoppingCartRepository.findShoppingCartById(shoppingCartId);
 	}
 
+	@Override
+	public void delete(Long id) {
+	
+		shoppingCartRepository.delete(id);		
+	}
+
 }

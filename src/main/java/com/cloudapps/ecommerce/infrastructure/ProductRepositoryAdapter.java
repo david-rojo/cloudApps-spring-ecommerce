@@ -50,7 +50,7 @@ public class ProductRepositoryAdapter implements ProductRepository {
 	@Override
 	public void delete(Long id) {
 		
-		productJpaRepository.deleteById(id);		
+		productJpaRepository.deleteById(id);
 	}
 
 }

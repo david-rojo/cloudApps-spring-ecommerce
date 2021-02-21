@@ -41,6 +41,12 @@ public class ShoppingCartService {
 		
 		return shoppingCartUseCase.deleteProduct(cartId, productId);
 	}
+
+	public void delete(Long id) {
+		
+		shoppingCartUseCase.delete(id);
+		
+	}
 	
 	
 }

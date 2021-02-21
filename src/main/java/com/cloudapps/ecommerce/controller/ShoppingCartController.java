@@ -60,8 +60,9 @@ public class ShoppingCartController {
 	
 	@DeleteMapping(value="/{id}")
 	public ShoppingCartResponseDto deleteShoppingCart(@PathVariable(value="id") Long id) {
-		//TODO pending to implement
-		return null;
+		FullShoppingCartDto fullShoppingCartDto = shoppingCarts.findById(id).orElseThrow();
+		shoppingCarts.delete(id);
+		return mapper.toShoppingCartResponseDto(fullShoppingCartDto);
 	}
 	
 	@PostMapping(value="/{cartId}/product/{productId}/quantity/{prodQuantity}")

@@ -11,6 +11,8 @@ public interface ShoppingCartRepository {
 	
 	public Optional<FullShoppingCartDto> findShoppingCartById(Long id);
 	
-	public FullShoppingCartDto save(FullShoppingCartDto shoppingCartDto);	
+	public FullShoppingCartDto save(FullShoppingCartDto shoppingCartDto);
+	
+	public void delete(Long id);
 	
 }
