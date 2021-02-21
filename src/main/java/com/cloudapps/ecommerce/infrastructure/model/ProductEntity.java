@@ -20,9 +20,6 @@ public class ProductEntity {
 	
 	private double price;
 	
-//	@ManyToMany(mappedBy = "products")
-//    private List<ShoppingCartEntity> shoppingCarts;
-	
 	public ProductEntity() {}
 	
 	public ProductEntity(String name, String description, double price) {

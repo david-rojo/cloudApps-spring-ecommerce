@@ -11,8 +11,6 @@ import javax.persistence.Table;
 @Table(name="cart_item")
 public class CartItemEntity {
 	
-	//https://stackoverflow.com/questions/7308804/setting-the-correct-jpa-mapping-for-shopping-cart-items-and-product
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -20,7 +18,6 @@ public class CartItemEntity {
 	private int quantity;
 		
 	@ManyToOne
-	//@JoinColumn(name="shoppingCartId", nullable=false)
 	private ShoppingCartEntity shoppingCart;
 	
 	@ManyToOne

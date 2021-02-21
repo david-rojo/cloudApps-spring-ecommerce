@@ -21,11 +21,6 @@ public class ShoppingCartEntity {
 	
 	private boolean completed;
 	
-//	@ManyToMany(cascade = { CascadeType.ALL })
-//    @JoinTable(name = "shopping_cart_cart_item",
-//            joinColumns = {@JoinColumn(name = "shopping_cart_id")},
-//            inverseJoinColumns = {@JoinColumn(name = "cart_item_id")})
-//    private List<CartItemEntity> cartItems;
 	@OneToMany(mappedBy = "shoppingCart")
 	private  List<CartItemEntity> cartItems;
 	
