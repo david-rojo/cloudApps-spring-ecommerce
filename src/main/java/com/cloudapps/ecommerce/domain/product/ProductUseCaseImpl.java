@@ -34,8 +34,13 @@ public class ProductUseCaseImpl implements ProductUseCase {
 	}
 
 	@Override
-	public void deleteProduct(Long id) {
-		productRepository.delete(id);
+	public Optional<FullProductDto> deleteProduct(Long id) {
+		
+		Optional<FullProductDto> product = this.productRepository.findProductById(id);
+        if (product.isPresent()) {
+        	productRepository.delete(product.get());
+        }
+        return product;
 	}
 
 }

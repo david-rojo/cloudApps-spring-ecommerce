@@ -36,8 +36,8 @@ public class ProductService {
 		return productUseCase.createProduct(productDto);
 	}
 	
-	public void delete(Long id) {
-		productUseCase.deleteProduct(id);
+	public Optional<FullProductDto> delete(Long id) {
+		return productUseCase.deleteProduct(id);
 	}
 
 }

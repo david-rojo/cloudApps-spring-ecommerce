@@ -13,5 +13,5 @@ public interface ProductRepository {
 
 	public Optional<FullProductDto> findProductById(Long id);
 	
-	public void delete(Long id);
+	public FullProductDto delete(FullProductDto product);
 }

@@ -14,5 +14,5 @@ public interface ProductUseCase {
 	
 	public Optional<FullProductDto> findProductById(Long id);
 	
-	public void deleteProduct(Long id);
+	public Optional<FullProductDto> deleteProduct(Long id);
 }

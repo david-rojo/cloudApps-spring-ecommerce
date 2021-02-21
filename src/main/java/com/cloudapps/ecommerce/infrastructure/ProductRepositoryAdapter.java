@@ -26,7 +26,7 @@ public class ProductRepositoryAdapter implements ProductRepository {
 	@Override
 	public FullProductDto save(FullProductDto product) {
 		
-		ProductEntity savedProductEntity = productJpaRepository.save(mapper.toProductEntity(product));		
+		ProductEntity savedProductEntity = productJpaRepository.save(mapper.toProductEntity(product));	
 		return mapper.toFullProductDto(savedProductEntity);
 	}
 
@@ -48,9 +48,10 @@ public class ProductRepositoryAdapter implements ProductRepository {
 	}
 
 	@Override
-	public void delete(Long id) {
+	public FullProductDto delete(FullProductDto product) {
 		
-		productJpaRepository.deleteById(id);
+		productJpaRepository.delete(mapper.toProductEntity(product));
+		return product;
 	}
 
 }
