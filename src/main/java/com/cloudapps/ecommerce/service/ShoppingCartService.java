@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.cloudapps.ecommerce.domain.exception.NotValidatedShoppingCartException;
 import com.cloudapps.ecommerce.domain.shoppingcart.ShoppingCartUseCase;
 import com.cloudapps.ecommerce.domain.shoppingcart.dto.FullShoppingCartDto;
 import com.cloudapps.ecommerce.domain.shoppingcart.dto.NewShoppingCartDto;
@@ -22,7 +23,7 @@ public class ShoppingCartService {
 		return shoppingCartUseCase.createShoppingCart();
 	}
 	
-	public FullShoppingCartDto complete(Long id) {
+	public Optional<FullShoppingCartDto> complete(Long id) throws NotValidatedShoppingCartException {
 		
 		return shoppingCartUseCase.complete(id);
 	}

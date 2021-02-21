@@ -2,8 +2,12 @@ package com.cloudapps.ecommerce.domain.shoppingcart;
 
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.cloudapps.ecommerce.domain.cartitem.CartItemRepository;
 import com.cloudapps.ecommerce.domain.cartitem.dto.FullCartItemDto;
+import com.cloudapps.ecommerce.domain.exception.NotValidatedShoppingCartException;
 import com.cloudapps.ecommerce.domain.product.ProductRepository;
 import com.cloudapps.ecommerce.domain.product.dto.FullProductDto;
 import com.cloudapps.ecommerce.domain.shoppingcart.dto.FullShoppingCartDto;
@@ -17,11 +21,17 @@ public class ShoppingCartUseCaseImpl implements ShoppingCartUseCase {
 	
 	private CartItemRepository cartItemRepository;
 	
+	private AvailabilityService availabilityService;
+	
+	private Logger log = LoggerFactory.getLogger(ShoppingCartUseCaseImpl.class);
+	
 	public ShoppingCartUseCaseImpl(ShoppingCartRepository shoppingCartRepository,
-			ProductRepository productRepository, CartItemRepository cartItemRepository) {
+			ProductRepository productRepository, CartItemRepository cartItemRepository,
+			AvailabilityService availabilityService) {
 		this.shoppingCartRepository = shoppingCartRepository;
 		this.productRepository = productRepository;
 		this.cartItemRepository = cartItemRepository;
+		this.availabilityService = availabilityService;
 	}
 	
 	@Override
@@ -30,11 +40,18 @@ public class ShoppingCartUseCaseImpl implements ShoppingCartUseCase {
 	}
 
 	@Override
-	public FullShoppingCartDto complete(Long id) {
+	public Optional<FullShoppingCartDto> complete(Long id) throws NotValidatedShoppingCartException {
 		
-		FullShoppingCartDto shoppingCart = shoppingCartRepository.findShoppingCartById(id).orElseThrow();
+		FullShoppingCartDto shoppingCart = shoppingCartRepository.findShoppingCartById(id)
+				.orElseThrow();
+		boolean validated = availabilityService.check();
+		if (!validated) {
+			log.error("Not validated shopping cart");
+			throw new NotValidatedShoppingCartException();
+		}
+		log.info("validated shopping cart");
 		shoppingCart.setCompleted(true);
-		return shoppingCartRepository.save(shoppingCart);
+		return Optional.of(shoppingCartRepository.save(shoppingCart));
 	}
 
 	@Override
