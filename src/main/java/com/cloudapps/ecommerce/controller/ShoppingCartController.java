@@ -78,7 +78,8 @@ public class ShoppingCartController {
 	public ShoppingCartResponseDto deleteProductFromShoppingCart(
 			@PathVariable(value="cartId") Long cartId,
 			@PathVariable(value="productId") Long productId) {
-		//TODO pending to implement
-		return null;
+		FullShoppingCartDto shoppingCartDto = shoppingCarts
+				.deleteProduct(cartId, productId).orElseThrow();
+		return mapper.toShoppingCartResponseDto(shoppingCartDto);
 	}
 }

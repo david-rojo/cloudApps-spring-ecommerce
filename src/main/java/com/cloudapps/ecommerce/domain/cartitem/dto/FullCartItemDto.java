@@ -23,6 +23,7 @@ public class FullCartItemDto {
 		this.id = id;
 		this.quantity = quantity;
 		this.product = product;
+		this.shoppingCart = shoppingCart;
 	}
 
 	public Long getId() {

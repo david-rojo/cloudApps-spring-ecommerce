@@ -63,9 +63,25 @@ public class ShoppingCartUseCaseImpl implements ShoppingCartUseCase {
         	shoppingCartRepository.save(shoppingCartDto.get());
         }
         
-        Optional<FullShoppingCartDto> result = this.shoppingCartRepository
+        return this.shoppingCartRepository.findShoppingCartById(shoppingCartId);
+	}
+
+	@Override
+	public Optional<FullShoppingCartDto> deleteProduct(Long shoppingCartId, Long productId) {
+		
+		Optional<FullProductDto> fullProductDto = this.productRepository.findProductById(productId);
+        Optional<FullShoppingCartDto> shoppingCartDto = this.shoppingCartRepository
         		.findShoppingCartById(shoppingCartId);
-        return result;
+        
+        if (fullProductDto.isPresent() && shoppingCartDto.isPresent()) {
+        	Optional<FullCartItemDto> existingCartItem = shoppingCartDto.get().contains(productId);
+        	if (existingCartItem.isPresent()) {
+        		shoppingCartDto.get().removeItem(existingCartItem.get());
+        		shoppingCartRepository.save(shoppingCartDto.get());
+        	}
+        }
+        
+		return this.shoppingCartRepository.findShoppingCartById(shoppingCartId);
 	}
 
 }

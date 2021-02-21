@@ -14,4 +14,6 @@ public interface ShoppingCartUseCase {
 	public Optional<FullShoppingCartDto> findShoppingCartById(Long id);
 
 	public Optional<FullShoppingCartDto> addProduct(Long shoppingCartId, Long productId, int prodQuantity);
+	
+	public Optional<FullShoppingCartDto> deleteProduct(Long shoppingCartId, Long productId);
 }

@@ -36,6 +36,11 @@ public class ShoppingCartService {
 		
 		return shoppingCartUseCase.addProduct(cartId, productId, prodQuantity);
 	}
+
+	public Optional<FullShoppingCartDto> deleteProduct(Long cartId, Long productId) {
+		
+		return shoppingCartUseCase.deleteProduct(cartId, productId);
+	}
 	
 	
 }
