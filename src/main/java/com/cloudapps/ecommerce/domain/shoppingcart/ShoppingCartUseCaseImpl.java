@@ -44,7 +44,7 @@ public class ShoppingCartUseCaseImpl implements ShoppingCartUseCase {
 		
 		FullShoppingCartDto shoppingCart = shoppingCartRepository.findShoppingCartById(id)
 				.orElseThrow();
-		boolean validated = availabilityService.check();
+		boolean validated = availabilityService.check(shoppingCart.getCartItems());
 		if (!validated) {
 			log.error("Not validated shopping cart");
 			throw new NotValidatedShoppingCartException();
