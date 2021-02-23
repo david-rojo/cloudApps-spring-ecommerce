@@ -29,3 +29,11 @@ SELECT * FROM SHOPPING_CART;
 SELECT * FROM CART_ITEM;
 SELECT * FROM PRODUCT;
 ```
+
+## Testing
+
+You can find a file named [Practice1-ecommerce.postman_collection.json](Practice1-ecommerce.postman_collection.json) that you can import in [Postman](https://www.postman.com/), to test the implemented endpoints.
+
+## Author
+
+[David Rojo (@david-rojo)](https://github.com/david-rojo)
