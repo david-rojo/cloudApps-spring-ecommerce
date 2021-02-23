@@ -27,7 +27,7 @@
 			"response": []
 		},
 		{
-			"name": "Gets products",
+			"name": "Get products",
 			"request": {
 				"method": "GET",
 				"header": [],
