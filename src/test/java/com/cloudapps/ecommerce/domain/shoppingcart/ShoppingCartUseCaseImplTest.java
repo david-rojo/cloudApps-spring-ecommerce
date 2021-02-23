@@ -40,7 +40,8 @@ public class ShoppingCartUseCaseImplTest {
 	
 	@BeforeEach
     public void beforeEach() {
-        this.shoppingCartUseCase = new ShoppingCartUseCaseImpl(shoppingCartRepository, productRepository,
+        
+		shoppingCartUseCase = new ShoppingCartUseCaseImpl(shoppingCartRepository, productRepository,
         		cartItemRepository, availabilityService);
     }
 	

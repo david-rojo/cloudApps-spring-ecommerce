@@ -27,7 +27,7 @@ class ProductUseCaseImplTest {
 	
 	@BeforeEach
     public void beforeEach() {
-        this.productUseCase = new ProductUseCaseImpl(productRepository);
+        productUseCase = new ProductUseCaseImpl(productRepository);
     }
 	
 	@Test
